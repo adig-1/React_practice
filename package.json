@@ -1,0 +1,18 @@
+{
+  "name": "reactcode",
+  "version": "1.0.0",
+  "description": "Practice_code",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Aditya Singh",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}
