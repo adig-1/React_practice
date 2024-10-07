@@ -1,0 +1,46 @@
+body{
+  background-color: aliceblue;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  border: black 1px solid;
+  padding: 8px;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.logo-container img{
+  height: 60px;
+  width: 80px;
+  
+}
+
+
+.nav-items ul{
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+}
+
+.card{
+  width: 200px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.card-content{
+  border: rgb(230, 14, 14) 1px solid ;
+  border-radius: 25px;
+
+}
+.card-img >img{
+  width: 190px;
+}
+
+.restaurant-card{
+  display: flex;  
+}
