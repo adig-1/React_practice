@@ -42,5 +42,9 @@ body{
 }
 
 .restaurant-card{
-  display: flex;  
+  display: flex;
+  flex-wrap: wrap;
+  
+  
+
 }
