@@ -1,6 +1,6 @@
 import RestaurantCard from "./Restaurent";
-import reslist from "../utilis/mock_data";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 
 
 //   {
@@ -98,21 +98,46 @@ import { useState } from "react";
 
 const Body = () => {
 
-    const [isreslist,setReslist]=useState(reslist);
+    const [isreslist,setReslist]=useState([]);
+    const [isFiltered,setFiltered]=useState([])
+    const[searchTxt,setSearchTxt]=useState("")
+
+    useEffect(()=>{
+        fetchData();
+    },[])
+
+    const fetchData=async()=>{
+        const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6330166&lng=77.4424737&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const json=await data.json();
+        setFiltered(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+        setReslist(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+        
+    }
 
   return (
     <>
       <div className="search-container">
-        <input type="text" className="search-input" placeholder="Search" />
-        <button className="search-btn">Search</button>
+        <input type="text" className="search-input" value={searchTxt} placeholder="Search" onChange={(e)=>{
+          setSearchTxt(e.target.value)
+        }} />
+        {console.log(searchTxt)}
+        <button className="search-btn" onClick={()=>
+          {
+            const searchRestaurent = isreslist.filter((res) =>
+              res.info.name.toLowerCase().includes(searchTxt.toLowerCase())
+            );
+            setFiltered(searchRestaurent);
+          }
+          
+        }>Search</button>
         <button className="filter-btn" onClick={()=>{
-            const filterRestaurent=reslist.filter((res)=>res.info.avgRating>4);
-        setReslist(filterRestaurent)}}
+            const filterRestaurent=isreslist.filter((res)=>res.info.avgRating>=4.4);
+        setFiltered(filterRestaurent)}}
         >Top rated restaurant</button>
       </div>
       <div className="restaurant-container">
         <div className="restaurant-card">
-          {isreslist.map((resData, index) => {
+          {isFiltered.map((resData, index) => {
             return <RestaurantCard key={index} resData={resData} />;
           })}
         </div>
