@@ -1,9 +1,10 @@
 import RestaurantCard from "./Restaurent";
 
 import { useEffect, useState } from "react";
+ import { Link } from "react-router-dom";
 
 
-//   {
+
 //     info: {
 //       id: "741003",
 //       name: "Chaayos Chai+Snacks=Relax",
@@ -117,30 +118,48 @@ const Body = () => {
   return (
     <>
       <div className="search-container">
-        <input type="text" className="search-input" value={searchTxt} placeholder="Search" onChange={(e)=>{
-          setSearchTxt(e.target.value)
-        }} />
+        <input
+          type="text"
+          className="search-input"
+          value={searchTxt}
+          placeholder="Search"
+          onChange={(e) => {
+            setSearchTxt(e.target.value);
+          }}
+        />
         {console.log(searchTxt)}
-        <button className="search-btn" onClick={()=>
-          {
+        <button
+          className="search-btn"
+          onClick={() => {
             const searchRestaurent = isreslist.filter((res) =>
               res.info.name.toLowerCase().includes(searchTxt.toLowerCase())
             );
             setFiltered(searchRestaurent);
-          }
-          
-        }>Search</button>
-        <button className="filter-btn" onClick={()=>{
-            const filterRestaurent=isreslist.filter((res)=>res.info.avgRating>=4.4);
-        setFiltered(filterRestaurent)}}
-        >Top rated restaurant</button>
+          }}
+        >
+          Search
+        </button>
+        <button
+          className="filter-btn"
+          onClick={() => {
+            const filterRestaurent = isreslist.filter(
+              (res) => res.info.avgRating >= 4.4
+            );
+            setFiltered(filterRestaurent);
+          }}
+        >
+          Top rated restaurant
+        </button>
       </div>
+     
       <div className="restaurant-container">
-        <div className="restaurant-card">
-          {isFiltered.map((resData, index) => {
-            return <RestaurantCard key={index} resData={resData} />;
-          })}
-        </div>
+        <a className="abc" href="/">
+          <div className="restaurant-card">
+            {isFiltered.map((resData, index) => {
+              return <RestaurantCard key={index} resData={resData} />;
+            })}
+          </div>
+        </a>
       </div>
     </>
   );
